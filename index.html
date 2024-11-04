@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        let getQuote = (category = '') => {
+            fetch(`https://api.api-ninjas.com/v1/quotes?category=${category}`, {
+                method: 'GET',
+                headers: { 'X-Api-Key': '/kUa3dgDBOF7Mav9oelL/g==cpkd6z1mLULOruTK' },
+                contentType: 'application/json'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    if (result.length > 0) {
+                        console.log(`Quote: ${result[0].quote}\nAuthor: ${result[0].author}\nCategory: ${result[0].category}`);
+                    } else {
+                        console.log('No quotes found for this category.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+
+
+    </script>
+</body>
+
+</html>
